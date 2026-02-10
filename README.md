@@ -179,7 +179,7 @@ All participants for the inspiration
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 📬 Contact
-For questions or feedback: contact-synapse@gmail.com
+For questions or feedback: contactsynapseflow@gmail.com
 
 Project Link: https://github.com/abdulboyprogramming-arch/synapseflow
 
