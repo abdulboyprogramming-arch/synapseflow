@@ -51,7 +51,7 @@
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/synapseflow.git
+git clone https://github.com/abdulboyprogramming-arch/synapseflow.git
 cd synapseflow
 
 # Install dependencies
@@ -179,8 +179,8 @@ All participants for the inspiration
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 📬 Contact
-For questions or feedback:
+For questions or feedback: contact-synapse@gmail.com
 
-Project Link: https://github.com/your-username/synapseflow
+Project Link: https://github.com/abdulboyprogramming-arch/synapseflow
 
 Issue Tracker: GitHub Issues
