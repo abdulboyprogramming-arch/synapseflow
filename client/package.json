@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -63,7 +64,4 @@
     "vitest": "^0.34.0",
     "@vitest/ui": "^0.34.0"
   }
-}
-{
-  "license": "MIT"
 }
