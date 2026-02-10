@@ -1,0 +1,55 @@
+synapseflow/
+├── client/                      # React Frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── components/         # Reusable UI components
+│   │   ├── pages/             # Page components
+│   │   ├── hooks/             # Custom React hooks
+│   │   ├── store/             # State management (Zustand)
+│   │   ├── utils/             # Helper functions
+│   │   ├── types/             # TypeScript definitions
+│   │   ├── assets/            # Images, fonts, etc.
+│   │   └── test/              # Test files
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tailwind.config.js
+│   ├── Dockerfile
+│   └── Dockerfile.prod
+│
+├── server/                      # Node.js Backend
+│   ├── src/
+│   │   ├── config/            # Configuration files
+│   │   ├── controllers/       # Route controllers
+│   │   ├── middleware/        # Express middleware
+│   │   ├── models/            # MongoDB schemas
+│   │   ├── routes/            # API routes
+│   │   ├── sockets/           # Socket.io handlers
+│   │   ├── utils/             # Utility functions
+│   │   ├── scripts/           # Database scripts
+│   │   └── templates/         # Email templates
+│   ├── logs/                  # Application logs
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── Dockerfile.prod
+│   └── .env.example
+│
+├── docs/                       # Documentation
+│   ├── API.md                 # API documentation
+│   ├── ARCHITECTURE.md        # System architecture
+│   └── DEPLOYMENT.md          # Deployment guide
+│
+├── monitoring/                 # Monitoring setup
+│   ├── prometheus.yml
+│   └── grafana/
+│
+├── nginx/                      # Nginx configuration
+│   ├── nginx.conf
+│   └── ssl/
+│
+├── docker-compose.yml         # Development compose file
+├── docker-compose.prod.yml    # Production compose file
+├── package.json              # Root package.json (monorepo)
+├── README.md                 # Project documentation
+├── PROJECT_SUBMISSION.md     # Hackathon submission doc
+├── .gitignore
+└── .github/workflows/        # CI/CD workflows

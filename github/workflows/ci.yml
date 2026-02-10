@@ -1,0 +1,147 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Lint and Test Backend
+  backend:
+    runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.adminCommand(\"ping\")'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+      
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: server/package-lock.json
+        
+    - name: Install Backend Dependencies
+      run: |
+        cd server
+        npm ci
+        
+    - name: Lint Backend
+      run: |
+        cd server
+        npm run lint
+        
+    - name: Test Backend
+      run: |
+        cd server
+        npm test
+      env:
+        MONGODB_URI: mongodb://localhost:27017/test_synapseflow
+        JWT_SECRET: test_jwt_secret
+        NODE_ENV: test
+        
+    - name: Build Backend
+      run: |
+        cd server
+        npm run build
+
+  # Lint and Test Frontend
+  frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: client/package-lock.json
+        
+    - name: Install Frontend Dependencies
+      run: |
+        cd client
+        npm ci
+        
+    - name: Lint Frontend
+      run: |
+        cd client
+        npm run lint
+        
+    - name: Test Frontend
+      run: |
+        cd client
+        npm test
+        
+    - name: Build Frontend
+      run: |
+        cd client
+        npm run build
+        
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: frontend-build
+        path: client/dist/
+        
+  # Docker Build Test
+  docker:
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      
+    - name: Build Backend Docker Image
+      run: |
+        cd server
+        docker build -t synapseflow-backend:test .
+        
+    - name: Build Frontend Docker Image
+      run: |
+        cd client
+        docker build -t synapseflow-frontend:test .
+        
+  # Security Scan
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run npm audit
+      run: |
+        cd server && npm audit --production
+        cd ../client && npm audit --production
+        
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --all-projects --detection-depth=6
