@@ -2,6 +2,7 @@
   "name": "synapseflow-server",
   "version": "1.0.0",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
@@ -42,7 +43,4 @@
     "@types/jest": "^29.5.3",
     "mongodb-memory-server": "^8.13.0"
   }
-}
-{
-  "license": "MIT"
 }
