@@ -158,13 +158,7 @@ Push to branch (git push origin feature/AmazingFeature)
 Open a Pull Request
 
 👥 Team
-Alex Chen - Full Stack Developer & Team Lead
-
-Sam Rodriguez - UI/UX Designer & Frontend Specialist
-
-Jordan Lee - Backend Engineer & DevOps
-
-Taylor Smith - Data Specialist & QA
+Adeeyo Abdulrahman (Abdulboy) - Full Stack Developer & AI Expert
 
 🙏 Acknowledgments
 CodeSpring Hackathon organizers
