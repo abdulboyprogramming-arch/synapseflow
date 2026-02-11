@@ -28,6 +28,9 @@ export default defineConfig({
         ws: true,
       },
     },
+    // Fix React Router SPA fallback
+    historyApiFallback: true, // Vite 4 supports this
+    open: true, // auto opens browser
   },
   test: {
     globals: true,
